@@ -52,7 +52,7 @@ public class DangNhap extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
 
         txtMaNhanVien.setBackground(new java.awt.Color(102, 255, 255));
         txtMaNhanVien.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -84,9 +84,9 @@ public class DangNhap extends javax.swing.JFrame {
             }
         });
 
-        btnHienThiMatKhau.setBackground(new java.awt.Color(153, 255, 255));
+        btnHienThiMatKhau.setBackground(new java.awt.Color(0, 153, 153));
         btnHienThiMatKhau.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/invisible.png"))); // NOI18N
-        btnHienThiMatKhau.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 255, 255)));
+        btnHienThiMatKhau.setBorder(null);
         btnHienThiMatKhau.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnHienThiMatKhauMousePressed(evt);
@@ -108,15 +108,15 @@ public class DangNhap extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 102, 255));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Hệ thống Quản Lý Nhà Hàng");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 102, 255));
+        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
         jLabel2.setText("Mã nhân viên");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 102, 255));
+        jLabel3.setForeground(new java.awt.Color(204, 204, 204));
         jLabel3.setText("Mật khẩu");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -170,7 +170,7 @@ public class DangNhap extends javax.swing.JFrame {
                 .addGap(25, 25, 25))
         );
 
-        jPanel2.setBackground(new java.awt.Color(0, 153, 204));
+        jPanel2.setBackground(new java.awt.Color(0, 102, 102));
         jPanel2.setForeground(new java.awt.Color(0, 153, 204));
 
         btnThoat.setBackground(new java.awt.Color(255, 51, 51));
@@ -202,7 +202,7 @@ public class DangNhap extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.setBackground(new java.awt.Color(102, 255, 255));
+        jPanel3.setBackground(new java.awt.Color(0, 204, 204));
         jPanel3.setForeground(new java.awt.Color(51, 204, 255));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N

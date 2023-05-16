@@ -113,4 +113,14 @@ public class QuanLyMonAn extends DataConnection{
         return n;
     }
     
+    public int suaLoaiMonAn(DTO.LoaiMonAn dto)
+    {
+        String truyvan = String.format("update LoaiMonAn set TenLoaiMonAn = N'%s' where MaLoaiMonAn = %d",dto.getTenLoaiMonAn(),dto.getMaLoaiMonAn());
+        open();
+        
+        int n = update(truyvan);
+        
+        close();
+        return n;
+    }
 }
