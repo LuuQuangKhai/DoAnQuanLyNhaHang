@@ -123,4 +123,56 @@ public class QuanLyMonAn extends DataConnection{
         close();
         return n;
     }
+    
+    public int kiemTraMonAn(int maMonAn)
+    {
+        String truyvan = String.format("select MaMonAn from MonAn where MaMonAn = %d", maMonAn);
+        open();
+        rs = query(truyvan);
+        int n = -1;
+        try
+        {
+            while(rs.next())
+            {
+                n = 1;
+            }
+        }
+        catch(Exception ex)
+        {
+            System.out.println(ex);
+        }
+        close();
+        return n;
+    }
+    
+    public int themMonAn(DTO.MonAn dto)
+    {
+        String truyvan = String.format("insert into MonAn values(N'%s',%f,%d,%d)", dto.getTenMonAn(),dto.getGiaTien(),dto.getSoLuong(),dto.getMaLoaiMon());
+        open();
+        int n = update(truyvan);
+        
+        close();
+        return n;
+    }
+    
+    public int xoaMonAn(int maMonAn)
+    {
+        String truyvan = String.format("delete from MonAn where MaMonAn = %d", maMonAn);
+        open();
+        
+        int n = update(truyvan);
+        close();
+        return n;
+    }
+    
+    public int suaMonAn(DTO.MonAn dto)
+    {
+        String truyvan = String.format("update MonAn set TenMonAn = %s, GiaTien = %f, SoLuong = %d, MaLoaiMonAn = %d where MaMonAn = %d",dto.getTenMonAn(),dto.getGiaTien(),dto.getSoLuong(),dto.getMaLoaiMon(),dto.getMaMonAn());
+        open();
+        
+        int n = update(truyvan);
+        close();
+        return n;
+    }
+    
 }
