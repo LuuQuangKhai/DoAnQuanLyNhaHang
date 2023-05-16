@@ -255,6 +255,11 @@ public class QuanLyMonAn extends javax.swing.JInternalFrame {
 
         btnTimKiem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnTimKiem.setText("Tìm kiếm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemActionPerformed(evt);
+            }
+        });
 
         txtMaMonAn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtMaMonAn.setEnabled(false);
@@ -289,6 +294,11 @@ public class QuanLyMonAn extends javax.swing.JInternalFrame {
 
         btnSuaMonAn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnSuaMonAn.setText("Sửa");
+        btnSuaMonAn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaMonAnActionPerformed(evt);
+            }
+        });
 
         btnLamMoi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnLamMoi.setText("Làm mới");
@@ -615,9 +625,89 @@ public class QuanLyMonAn extends javax.swing.JInternalFrame {
         }
         else
         {
-            
+            int t = thongBaoXacNhan("Xóa món ăn?");
+            if(t == JOptionPane.YES_OPTION)
+            {
+                DAO.QuanLyMonAn dao = new DAO.QuanLyMonAn();
+                int k = dao.xoaMonAn(Integer.valueOf(this.txtMaMonAn.getText()));
+                if(k == -1)
+                {
+                    thongBao("Xóa thất bại!");
+                }
+                else
+                {
+                    thongBao("Xóa thành công.");
+                    lamMoi();
+                    layDanhSachMonAn();
+                    hienThiMonAn();
+                }
+            }
         }
     }//GEN-LAST:event_btnXoaMonAnActionPerformed
+
+    private void btnSuaMonAnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaMonAnActionPerformed
+        // TODO add your handling code here:
+        int n = this.tblMonAn.getSelectedRow();
+        if(n == -1)
+        {
+            thongBao("Hãy chọn món ăn cần sửa trên table.");
+        }
+        else
+        {
+            if(this.txtTenMonAn.getText().trim().equals("") || this.txtGiaTien.getText().trim().equals("") || this.txtSoLuong.getText().trim().equals(""))    
+            {
+                thongBao("Phải nhập đầy đủ thông tin!");
+            }
+            else
+            {
+                int t = thongBaoXacNhan("Thay đổi dữ thông tin?");
+                if(t == JOptionPane.YES_OPTION)
+                {
+                    try
+                    {
+                        float giaTien = Float.valueOf(this.txtGiaTien.getText().trim());
+                        int soLuong = Integer.valueOf(this.txtSoLuong.getText().trim());
+                        DTO.MonAn dto = new DTO.MonAn();
+                        dto.setTenMonAn(this.txtTenMonAn.getText().trim());
+                        dto.setGiaTien(giaTien);
+                        dto.setSoLuong(soLuong);
+                        LoaiMonAn x = dsLoaiMonAn.get(this.cboMaLoaiMonAn.getSelectedIndex());
+                        dto.setMaLoaiMon(x.getMaLoaiMonAn());
+                        dto.setMaMonAn(Integer.valueOf(this.txtMaMonAn.getText()));
+                        DAO.QuanLyMonAn dao = new DAO.QuanLyMonAn();
+                        int y = dao.suaMonAn(dto);
+                        if(y == -1)
+                        {
+                            thongBao("Sửa món ăn không thành công");
+                        }
+                        else
+                        {
+                            thongBao("Đã sửa món ăn.");
+                            layDanhSachMonAn();
+                            hienThiMonAn();
+                            lamMoi();
+                        }
+                    }
+                    catch(Exception ex)
+                    {
+                        thongBao("Giá tiền và số lượng chỉ được nhập kí tự số!");
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_btnSuaMonAnActionPerformed
+
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+        // TODO add your handling code here:
+        if(this.txtTimKiemMonAn.getText().trim().equals(""))
+            thongBao("Vui lòng nhập vào ô tìm kiếm!");
+        else
+        {
+            DAO.QuanLyMonAn dao = new DAO.QuanLyMonAn();
+            dsMonAn = dao.timKiemMonAn(this.txtTimKiemMonAn.getText().trim());
+            hienThiMonAn();
+        }
+    }//GEN-LAST:event_btnTimKiemActionPerformed
 
 
     private void layDanhSachLoaiMonAn()

@@ -167,12 +167,42 @@ public class QuanLyMonAn extends DataConnection{
     
     public int suaMonAn(DTO.MonAn dto)
     {
-        String truyvan = String.format("update MonAn set TenMonAn = %s, GiaTien = %f, SoLuong = %d, MaLoaiMonAn = %d where MaMonAn = %d",dto.getTenMonAn(),dto.getGiaTien(),dto.getSoLuong(),dto.getMaLoaiMon(),dto.getMaMonAn());
+        String truyvan = String.format("update MonAn set TenMonAn = N'%s', GiaTien = %f, SoLuong = %d, MaLoaiMonAn = %d where MaMonAn = %d",dto.getTenMonAn(),dto.getGiaTien(),dto.getSoLuong(),dto.getMaLoaiMon(),dto.getMaMonAn());
         open();
         
         int n = update(truyvan);
         close();
         return n;
+    }
+    
+    public ArrayList<DTO.MonAn> timKiemMonAn(String tenMonAn)
+    {
+        ArrayList<DTO.MonAn> ds = new ArrayList<>();
+        
+        String truyvan = "select * from MonAn where TenMonAn like N'%"+tenMonAn+"%'";
+        open();
+        rs = query(truyvan);
+        
+        try
+        {
+            while(rs.next())
+            {
+                MonAn x = new MonAn();
+                x.setMaMonAn(rs.getInt("MaMonAn"));
+                x.setTenMonAn(rs.getString("TenMonAn"));
+                x.setGiaTien(rs.getFloat("GiaTien"));
+                x.setSoLuong(rs.getInt("SoLuong"));
+                x.setMaLoaiMon(rs.getInt("MaLoaiMonAn"));
+                ds.add(x);
+            }
+        }
+        catch(Exception ex)
+        {
+            System.out.println(ex);
+        }
+        
+        
+        return ds;
     }
     
 }
